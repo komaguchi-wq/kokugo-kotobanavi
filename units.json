@@ -16,5 +16,47 @@
     "title": "1-4 熟語",
     "subject": "国語",
     "question_count": 652
+  },
+  {
+    "id": "1-5",
+    "title": "1-5 同音異義語・同訓異字",
+    "subject": "国語",
+    "question_count": 555
+  },
+  {
+    "id": "1-6",
+    "title": "1-6 いろいろな言葉",
+    "subject": "国語",
+    "question_count": 378
+  },
+  {
+    "id": "2-1",
+    "title": "2-1 ことわざ",
+    "subject": "国語",
+    "question_count": 75
+  },
+  {
+    "id": "2-2",
+    "title": "2-2 慣用句",
+    "subject": "国語",
+    "question_count": 428
+  },
+  {
+    "id": "2-3",
+    "title": "2-3 熟語",
+    "subject": "国語",
+    "question_count": 376
+  },
+  {
+    "id": "2-4",
+    "title": "2-4 同音異義語・同訓異字",
+    "subject": "国語",
+    "question_count": 267
+  },
+  {
+    "id": "2-5",
+    "title": "2-5 その他",
+    "subject": "国語",
+    "question_count": 139
   }
 ]
