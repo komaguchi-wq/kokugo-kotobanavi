@@ -25,6 +25,7 @@
       <button class="btn-icon" id="btn-switch-user">👤</button>
       <h1 class="header-title">国語 言葉ナビ</h1>
       <span class="header-user" id="header-user-name"></span>
+      <button class="btn-icon" id="btn-settings">⚙</button>
     </header>
     <div class="unit-list" id="unit-list"></div>
   </div>
@@ -117,6 +118,27 @@
       <div class="results-actions">
         <button class="btn btn-primary btn-large" id="btn-retry-wrong">間違えた問題をやり直す</button>
         <button class="btn btn-secondary btn-large" id="btn-back-unit-detail">単元に戻る</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 設定画面 -->
+  <div id="screen-settings" class="screen">
+    <header class="header">
+      <button class="btn-icon" id="btn-close-settings">←</button>
+      <h1 class="header-title">設定</h1>
+    </header>
+    <div class="settings-body">
+      <div class="settings-section">
+        <h2 class="section-title">Google Sheets バックアップ</h2>
+        <label class="settings-label" for="settings-url">スプレッドシート API URL</label>
+        <input type="url" id="settings-url" class="settings-input" placeholder="https://script.google.com/macros/s/...">
+        <button class="btn btn-primary btn-large" id="btn-save-settings">URLを保存</button>
+      </div>
+      <div class="settings-section">
+        <h2 class="section-title">データ復元</h2>
+        <p class="settings-hint">別の端末からデータを引き継ぐ場合、スプレッドシートのURLを設定してから復元ボタンを押してください。</p>
+        <button class="btn btn-secondary btn-large" id="btn-restore">スプレッドシートから復元</button>
       </div>
     </div>
   </div>

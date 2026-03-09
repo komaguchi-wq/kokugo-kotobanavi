@@ -15,7 +15,7 @@ let answerRevealed = false;
 let imageCache = {};
 let currentMode = "all";
 
-const SHEETS_API_URL = localStorage.getItem("sheets-api-url") || "";
+let SHEETS_API_URL = localStorage.getItem("kokugo-sheets-api-url") || "";
 
 // --- トラッキングデータ ---
 function getTracking() {
@@ -82,6 +82,58 @@ async function backupToSheets() {
   } catch (e) {
     console.warn("Sheets backup failed:", e);
   }
+}
+
+// --- Google Sheets 復元 ---
+async function restoreFromSheets() {
+  if (!SHEETS_API_URL) {
+    alert("スプレッドシートのURLが設定されていません");
+    return;
+  }
+  const url = SHEETS_API_URL + "?user=" + encodeURIComponent(currentUser);
+  try {
+    const res = await fetch(url);
+    const json = await res.json();
+    if (json.status !== "ok") {
+      alert("復元に失敗しました: " + (json.message || "不明なエラー"));
+      return;
+    }
+    if (!json.data || Object.keys(json.data).length === 0) {
+      alert("スプレッドシートにデータがありません");
+      return;
+    }
+    // 既存データとマージ（スプレッドシート側を優先）
+    const current = getTracking();
+    for (const unitId in json.data) {
+      if (!current[unitId]) current[unitId] = {};
+      for (const key in json.data[unitId]) {
+        current[unitId][key] = json.data[unitId][key];
+      }
+    }
+    setTracking(current);
+    alert("復元しました");
+    renderUnits();
+  } catch (e) {
+    alert("復元に失敗しました: " + e.message);
+  }
+}
+
+// --- 設定画面 ---
+function openSettings() {
+  document.getElementById("settings-url").value = SHEETS_API_URL;
+  showScreen("screen-settings");
+}
+
+function saveSettings() {
+  const url = document.getElementById("settings-url").value.trim();
+  SHEETS_API_URL = url;
+  localStorage.setItem("kokugo-sheets-api-url", url);
+  alert("保存しました");
+}
+
+function closeSettings() {
+  renderUnits();
+  showScreen("screen-units");
 }
 
 // --- 画面切り替え ---
@@ -583,6 +635,12 @@ function setupEventListeners() {
     sessionStorage.removeItem("current-user");
     showScreen("screen-user");
   });
+
+  // 設定
+  document.getElementById("btn-settings").addEventListener("click", openSettings);
+  document.getElementById("btn-save-settings").addEventListener("click", saveSettings);
+  document.getElementById("btn-restore").addEventListener("click", restoreFromSheets);
+  document.getElementById("btn-close-settings").addEventListener("click", closeSettings);
 
   // 単元詳細 → 戻る
   document.getElementById("btn-back-units").addEventListener("click", () => {
