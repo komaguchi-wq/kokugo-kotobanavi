@@ -15,7 +15,7 @@ let answerRevealed = false;
 let imageCache = {};
 let currentMode = "all";
 
-let SHEETS_API_URL = localStorage.getItem("kokugo-sheets-api-url") || "";
+let SHEETS_API_URL = localStorage.getItem("kokugo-sheets-api-url") || "https://script.google.com/macros/s/AKfycbwlKa7s6b3Oka8UewdNznhs21RtlcApXfH4JDYMZAy1XaEfteynaXuxzI9EXF2laJ-Y/exec";
 
 // --- トラッキングデータ ---
 function getTracking() {
